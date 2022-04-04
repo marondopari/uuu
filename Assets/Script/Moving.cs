@@ -4,20 +4,34 @@ using UnityEngine;
 
 public class Moving : MonoBehaviour
 {
-    public float speed = 10.0f;
-    public Rigidbody rb;
 
-    // Start is called before the first frame update
+    public float speed = 6.0f;
+    public float jumpSpeed = 8.0f;
+    public float gravity = 20.0f;
+
+    private Vector3 moveDirection = Vector3.zero;
+    private CharacterController controller;
+
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        controller = GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxis("Horizontal") * speed;
-        float z = Input.GetAxis("Vertical") * speed;
-        rb.AddForce(x, 0, z);
+        if (controller.isGrounded)
+        {
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+            moveDirection = transform.TransformDirection(moveDirection);
+            moveDirection = moveDirection * speed;
+
+            if (Input.GetButton("Jump"))
+            {
+                moveDirection.y = jumpSpeed;
+            }
+        }
+
+        moveDirection.y = moveDirection.y - (gravity * Time.deltaTime);
+        controller.Move(moveDirection * Time.deltaTime);
     }
 }
