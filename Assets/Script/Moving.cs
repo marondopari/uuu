@@ -25,7 +25,7 @@ public class Moving : MonoBehaviour
 
             Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));  //左右上下のキー入力を取得し、移動方向に代入
             moveDirection = transform.TransformDirection(moveDirection);    //移動方向をローカルからワールド空間に変換する
-            moveVelocity = moveVelocity * speed;      //移動速度を掛ける
+            moveVelocity = moveDirection * speed;      //移動速度を掛ける
 
             //スペースキーが押されていたら
             if (Input.GetButton("Jump"))
