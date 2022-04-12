@@ -12,7 +12,7 @@ public class Hp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hpSlider = GameObject.Find("Slider").GetComponent<Slider>();
+        hpSlider = GameObject.Find("Slider").GetComponent<Slider>();  // スライダーを取得する
         hpSlider.maxValue = maxHp;    // Sliderの最大値をプレイヤーHP最大値と合わせる
         
         currentHp = maxHp;      // 初期状態はHP満タン
